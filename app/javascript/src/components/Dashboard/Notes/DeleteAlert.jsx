@@ -7,32 +7,38 @@ import notesApi from "apis/notes";
 const DeleteAlert = ({
   refetch,
   onClose,
-  selectedNoteIds,
-  setSelectedNoteIds,
+  isOpen,
+  selectedNote,
+  setSelectedNote,
 }) => {
   const [deleting, setDeleting] = useState(false);
 
   const handleDelete = async () => {
+    setDeleting(true);
     try {
-      setDeleting(true);
-      await notesApi.destroy({ ids: selectedNoteIds });
+      await notesApi.destroy({ ids: [selectedNote.id] });
       onClose();
-      setSelectedNoteIds([]);
+      setSelectedNote({});
       refetch();
     } catch (error) {
       logger.error(error);
+    } finally {
       setDeleting(false);
     }
   };
 
   return (
     <Alert
-      isOpen
+      isOpen={isOpen}
       isSubmitting={deleting}
-      message="Are you sure you want to continue? This cannot be undone."
-      title={`Delete ${selectedNoteIds.length} ${
-        selectedNoteIds.length > 1 ? "notes" : "note"
-      }?`}
+      title="Delete Note"
+      message={
+        <>
+          Continue deleting&nbsp;
+          <span className="neeto-ui-font-bold">{selectedNote.title}</span>? This
+          action cannot be undone.
+        </>
+      }
       onClose={onClose}
       onSubmit={handleDelete}
     />

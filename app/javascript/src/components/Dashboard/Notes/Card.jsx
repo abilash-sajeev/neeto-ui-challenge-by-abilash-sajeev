@@ -10,19 +10,26 @@ import {
 
 import { USER_NAME, USER_AVATAR_URL } from "./constants";
 
-const Card = ({ note }) => {
+const Card = ({ note, setSelectedNote, setShowDeleteAlert }) => {
   const { Menu, MenuItem } = Dropdown;
+
+  const handleDeleteNote = () => {
+    setSelectedNote(note);
+    setShowDeleteAlert(true);
+  };
 
   return (
     <div className="neeto-ui-shadow-xs neeto-ui-rounded-sm mb-4 flex w-full flex-col border p-4">
-      <div className="flex items-center justify-between">
+      <div className="flex items-start justify-between">
         <Typography style="h4" weight="bold">
           {note.title}
         </Typography>
         <Dropdown buttonStyle="text" icon={() => <MenuVertical size={16} />}>
           <Menu>
             <MenuItem.Button>Edit</MenuItem.Button>
-            <MenuItem.Button style="danger">Delete</MenuItem.Button>
+            <MenuItem.Button style="danger" onClick={handleDeleteNote}>
+              Delete
+            </MenuItem.Button>
           </Menu>
         </Dropdown>
       </div>
