@@ -21,7 +21,6 @@ const EmptyState = ({
       <div className="flex flex-row items-center justify-center">
         {primaryAction && (
           <Button
-            icon="ri-add-fill"
             label={primaryActionLabel}
             size="small"
             type="primary"

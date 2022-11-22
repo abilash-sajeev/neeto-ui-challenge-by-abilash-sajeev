@@ -10,17 +10,6 @@ export const NOTES_FORM_VALIDATION_SCHEMA = yup.object().shape({
   description: yup.string().required("Description is required"),
 });
 
-export const NOTES_TABLE_COLUMN_DATA = [
-  {
-    title: "Title",
-    dataIndex: "title",
-    key: "title",
-    width: "30%",
-  },
-  {
-    title: "Description",
-    dataIndex: "description",
-    key: "description",
-    width: "70%",
-  },
-];
+export const USER_NAME = "Oliver Smith";
+
+export const USER_AVATAR_URL = "https://i.pravatar.cc/300";
