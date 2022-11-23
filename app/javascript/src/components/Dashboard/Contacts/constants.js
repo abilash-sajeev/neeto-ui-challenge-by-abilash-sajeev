@@ -1,3 +1,6 @@
+import { buildSelectOptions } from "utils";
+import * as yup from "yup";
+
 import { generateContactsData } from "./utils";
 
 export const CONTACTS_DATA = generateContactsData(
@@ -45,3 +48,36 @@ export const CONTACTS_DATA = generateContactsData(
   ],
   5
 );
+
+export const CONTACTS_FORM_INITIAL_FORM_VALUES = {
+  firstName: "",
+  lastName: "",
+  emailAddress: "",
+  role: null,
+};
+
+export const ROLES_DATA = buildSelectOptions([
+  "Owner",
+  "Admin",
+  "External User",
+  "Project Manager",
+  "Agent",
+]);
+
+export const CONTACTS_FORM_VALIDATION_SCHEMA = yup.object().shape({
+  firstName: yup.string().required("First name is required"),
+  lastName: yup.string().required("Last name is required"),
+  email: yup
+    .string()
+    .email("Please enter a valid email")
+    .required("Email address is required"),
+  role: yup
+    .object()
+    .shape({
+      label: yup.string().oneOf(ROLES_DATA.map(role => role.label)),
+      value: yup.string().oneOf(ROLES_DATA.map(role => role.value)),
+    })
+    .required("Role is required"),
+});
+
+export const USER_AVATAR_URL = "https://i.pravatar.cc/300";

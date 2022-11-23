@@ -33,39 +33,37 @@ export const renderDropdownMenu = () => (
   </Dropdown>
 );
 
-export const buildColumnData = () => {
-  const columnData = [
-    {
-      title: "Name & Role",
-      dataIndex: "NameAndRole",
-      key: "NameAndRole",
-      render: renderAvatarWithNameAndRole,
-    },
-    {
-      title: "Email",
-      dataIndex: "email",
-      key: "email",
-    },
-    {
-      title: "Created at",
-      dataIndex: "createdAt",
-      key: "createdAt",
-      render: formatDate,
-    },
-    {
-      title: "",
-      dataIndex: "action",
-      key: "action",
-      width: "48px",
-      render: renderDropdownMenu,
-    },
-  ];
+export const buildColumnData = () => [
+  {
+    title: "Name & Role",
+    dataIndex: "NameAndRole",
+    key: "NameAndRole",
+    render: renderAvatarWithNameAndRole,
+  },
+  {
+    title: "Email",
+    dataIndex: "email",
+    key: "email",
+  },
+  {
+    title: "Created at",
+    dataIndex: "createdAt",
+    key: "createdAt",
+    render: formatDate,
+  },
+  {
+    title: "",
+    dataIndex: "action",
+    key: "action",
+    width: "48px",
+    render: renderDropdownMenu,
+  },
+];
 
-  return columnData;
-};
+export const generateUUID = () => Math.random().toString(36).slice(-6);
 
 export const generateContactsData = (contacts, multiplier = 2) =>
   Array(multiplier)
     .fill(contacts)
     .flat()
-    .map((contact, index) => ({ ...contact, id: index }));
+    .map(contact => ({ ...contact, id: generateUUID() }));
