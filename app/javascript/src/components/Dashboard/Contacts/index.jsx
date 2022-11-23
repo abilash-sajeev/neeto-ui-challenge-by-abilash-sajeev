@@ -10,7 +10,7 @@ import EmptyState from "components/Common/EmptyState";
 import { CONTACTS_DATA } from "./constants";
 import DeleteAlert from "./DeleteAlert";
 import MenuBar from "./MenuBar";
-import NewContactPane from "./Pane/Create";
+import NewContactPane from "./Pane/NewContactPane";
 import Table from "./Table";
 
 const Contacts = () => {

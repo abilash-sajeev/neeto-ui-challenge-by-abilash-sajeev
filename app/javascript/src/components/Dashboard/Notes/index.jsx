@@ -10,7 +10,7 @@ import EmptyState from "components/Common/EmptyState";
 import Card from "./Card";
 import DeleteAlert from "./DeleteAlert";
 import MenuBar from "./MenuBar";
-import NewNotePane from "./Pane/Create";
+import NewNotePane from "./Pane/NewNotePane";
 
 const Notes = () => {
   const [loading, setLoading] = useState(true);
