@@ -86,7 +86,7 @@ const Form = ({ onClose, setContacts, contact }) => {
             <Button
               className="mr-3"
               disabled={isSubmitting}
-              label="Save changes"
+              label="Save Changes"
               loading={isSubmitting}
               style="primary"
               type="submit"
