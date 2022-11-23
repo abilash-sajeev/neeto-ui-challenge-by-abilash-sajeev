@@ -10,9 +10,9 @@ import {
 
 import { USER_NAME, USER_AVATAR_URL } from "./constants";
 
-const Card = ({ note, setSelectedNote, setShowDeleteAlert }) => {
-  const { Menu, MenuItem } = Dropdown;
+const { Menu, MenuItem } = Dropdown;
 
+const Card = ({ note, setSelectedNote, setShowDeleteAlert }) => {
   const handleDeleteNote = () => {
     setSelectedNote(note);
     setShowDeleteAlert(true);
