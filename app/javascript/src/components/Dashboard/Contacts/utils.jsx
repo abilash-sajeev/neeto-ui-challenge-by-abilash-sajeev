@@ -24,16 +24,18 @@ export const renderAvatarWithNameAndRole = (
   </div>
 );
 
-export const renderDropdownMenu = () => (
+export const renderDropdownMenu = handleDeleteContact => (
   <Dropdown buttonStyle="text" icon={() => <MenuHorizontal size={16} />}>
     <Menu>
       <MenuItem.Button>Edit</MenuItem.Button>
-      <MenuItem.Button style="danger">Delete</MenuItem.Button>
+      <MenuItem.Button style="danger" onClick={handleDeleteContact}>
+        Delete
+      </MenuItem.Button>
     </Menu>
   </Dropdown>
 );
 
-export const buildColumnData = () => [
+export const buildColumnData = handleDeleteContact => [
   {
     title: "Name & Role",
     dataIndex: "NameAndRole",
@@ -56,7 +58,7 @@ export const buildColumnData = () => [
     dataIndex: "action",
     key: "action",
     width: "48px",
-    render: renderDropdownMenu,
+    render: () => renderDropdownMenu(handleDeleteContact),
   },
 ];
 
@@ -67,3 +69,33 @@ export const generateContactsData = (contacts, multiplier = 2) =>
     .fill(contacts)
     .flat()
     .map(contact => ({ ...contact, id: generateUUID() }));
+
+export const customizeValuesByDeletionType = (
+  deletionType,
+  selectedContact,
+  selectedContactIds
+) => {
+  if (deletionType === "single") {
+    return [
+      [selectedContact.id],
+      "Delete contact",
+      <>
+        Continue deleting&nbsp;
+        <span className="neeto-ui-font-bold">
+          {selectedContact.firstName} {selectedContact.lastName}
+        </span>
+        ? This action cannot be undone.
+      </>,
+    ];
+  }
+
+  return [
+    selectedContactIds,
+    `Delete ${selectedContactIds.length} ${
+      selectedContactIds.length > 1 ? "contacts" : "contact"
+    }`,
+    `Are you sure you want to delete ${
+      selectedContactIds.length > 1 ? "these contacts" : "this contact"
+    }? This action cannot be undone.`,
+  ];
+};
