@@ -80,7 +80,7 @@ export const customizeValuesByDeletionType = (
   if (deletionType === "single") {
     return [
       [selectedContact.id],
-      "Delete contact",
+      "Delete Contact",
       <>
         Continue deleting&nbsp;
         <span className="neeto-ui-font-bold">
@@ -93,8 +93,10 @@ export const customizeValuesByDeletionType = (
 
   return [
     selectedContactIds,
-    `Delete ${selectedContactIds.length} ${
-      selectedContactIds.length > 1 ? "contacts" : "contact"
+    `Delete ${
+      selectedContactIds.length > 1
+        ? `${selectedContactIds.length} Contacts`
+        : "Contact"
     }`,
     `Are you sure you want to delete ${
       selectedContactIds.length > 1 ? "these contacts" : "this contact"

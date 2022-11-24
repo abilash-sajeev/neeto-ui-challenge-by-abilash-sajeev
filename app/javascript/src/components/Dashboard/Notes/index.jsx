@@ -48,7 +48,7 @@ const Notes = () => {
       <MenuBar isMenuBarOpen={isMenuBarOpen} />
       <Container>
         <Header
-          title="Notes"
+          title="All Notes"
           actionBlock={
             <Button
               label="Add Note"
