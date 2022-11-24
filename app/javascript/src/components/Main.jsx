@@ -24,7 +24,7 @@ import {
 } from "utils/storage";
 
 const Main = props => {
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const { authToken } = useAuthState();
   const { user: userContextState } = useUserState();
   const userDispatch = useUserDispatch();
@@ -36,7 +36,7 @@ const Main = props => {
     userDispatch({ type: "SET_USER", payload: { user: props?.user } });
     initializeLogger();
     registerIntercepts(authDispatch);
-    setAuthHeaders(setLoading);
+    setAuthHeaders(setIsLoading);
   }, [authDispatch, props?.user, userDispatch]);
 
   useEffect(() => {
@@ -48,7 +48,7 @@ const Main = props => {
     if (sessionExpiredButLocalStorageCredsExist) clearLocalStorageCredentials();
   }, [props?.user?.email]);
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="h-screen">
         <PageLoader />

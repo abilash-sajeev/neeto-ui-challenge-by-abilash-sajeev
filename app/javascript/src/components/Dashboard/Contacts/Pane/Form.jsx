@@ -1,36 +1,17 @@
 import React, { useState } from "react";
 
-import dayjs from "dayjs";
 import { Formik, Form as FormikForm } from "formik";
 import { Button, Pane, Toastr } from "neetoui";
 import { Input, Select } from "neetoui/formik";
 
-import {
-  ROLES_DATA,
-  CONTACTS_FORM_VALIDATION_SCHEMA,
-  USER_AVATAR_URL,
-} from "../constants";
-import { generateUUID } from "../utils";
+import { ROLES_DATA, CONTACTS_FORM_VALIDATION_SCHEMA } from "../constants";
+import { createContact } from "../utils";
 
 const Form = ({ onClose, setContacts, contact }) => {
-  const [submitted, setSubmitted] = useState(false);
-
-  const createContact = contact => {
-    setContacts(contacts =>
-      contacts.concat([
-        {
-          ...contact,
-          id: generateUUID(),
-          role: contact.role.label,
-          userAvatarUrl: USER_AVATAR_URL,
-          createdAt: dayjs(),
-        },
-      ])
-    );
-  };
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = contact => {
-    createContact(contact);
+    createContact({ contact, setContacts });
     Toastr.success("Contact added successfully");
     onClose();
   };
@@ -38,8 +19,8 @@ const Form = ({ onClose, setContacts, contact }) => {
   return (
     <Formik
       initialValues={contact}
-      validateOnBlur={submitted}
-      validateOnChange={submitted}
+      validateOnBlur={isSubmitted}
+      validateOnChange={isSubmitted}
       validationSchema={CONTACTS_FORM_VALIDATION_SCHEMA}
       onSubmit={handleSubmit}
     >
@@ -90,7 +71,7 @@ const Form = ({ onClose, setContacts, contact }) => {
               loading={isSubmitting}
               style="primary"
               type="submit"
-              onClick={() => setSubmitted(true)}
+              onClick={() => setIsSubmitted(true)}
             />
             <Button
               label="Cancel"

@@ -10,37 +10,39 @@ import EmptyState from "components/Common/EmptyState";
 import { CONTACTS_DATA } from "./constants";
 import DeleteAlert from "./DeleteAlert";
 import MenuBar from "./MenuBar";
-import NewContactPane from "./Pane/NewContactPane";
+import NewContactPane from "./Pane/NewContact";
 import Table from "./Table";
 
 const Contacts = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedContactIds, setSelectedContactIds] = useState([]);
-  const [showDeleteAlert, setShowDeleteAlert] = useState(false);
-  const [showMenuBar, setShowMenuBar] = useState(false);
-  const [showNewContactPane, setShowNewContactPane] = useState(false);
+  const [isDeleteAlertOpen, setIsDeleteAlertOpen] = useState(false);
+  const [isMenuBarOpen, setIsMenuBarOpen] = useState(false);
+  const [isNewContactPaneOpen, setIsNewContactPaneOpen] = useState(false);
   const [contacts, setContacts] = useState(CONTACTS_DATA);
   const [selectedContact, setSelectedContact] = useState({});
   const [deletionType, setDeletionType] = useState("");
 
   const handleBulkDelete = () => {
     setDeletionType("bulk");
-    setShowDeleteAlert(true);
+    setIsDeleteAlertOpen(true);
   };
 
   return (
     <>
-      <MenuBar showMenuBar={showMenuBar} />
+      <MenuBar isMenuBarOpen={isMenuBarOpen} />
       <Container>
         <Header
-          menuBarToggle={() => setShowMenuBar(showMenuBar => !showMenuBar)}
           title="All Contacts"
           actionBlock={
             <Button
               label="Add Contact"
               size="small"
-              onClick={() => setShowNewContactPane(true)}
+              onClick={() => setIsNewContactPaneOpen(true)}
             />
+          }
+          menuBarToggle={() =>
+            setIsMenuBarOpen(isMenuBarOpen => !isMenuBarOpen)
           }
           searchProps={{
             value: searchTerm,
@@ -64,34 +66,34 @@ const Contacts = () => {
               contacts={contacts}
               selectedContactIds={selectedContactIds}
               setDeletionType={setDeletionType}
+              setIsDeleteAlertOpen={setIsDeleteAlertOpen}
               setSelectedContact={setSelectedContact}
               setSelectedContactIds={setSelectedContactIds}
-              setShowDeleteAlert={setShowDeleteAlert}
             />
           </>
         ) : (
           <EmptyState
             image={EmptyNotesListImage}
-            primaryAction={() => setShowNewContactPane(true)}
+            primaryAction={() => setIsNewContactPaneOpen(true)}
             primaryActionLabel="Add Contact"
             subtitle="Add your contacts here."
             title="Looks like you don't have any contacts!"
           />
         )}
         <NewContactPane
+          isNewContactPaneOpen={isNewContactPaneOpen}
           setContacts={setContacts}
-          setShowPane={setShowNewContactPane}
-          showPane={showNewContactPane}
+          setIsNewContactPaneOpen={setIsNewContactPaneOpen}
         />
         <DeleteAlert
           deletionType={deletionType}
-          isOpen={showDeleteAlert}
+          isOpen={isDeleteAlertOpen}
           selectedContact={selectedContact}
           selectedContactIds={selectedContactIds}
           setContacts={setContacts}
           setSelectedContact={setSelectedContact}
           setSelectedContactIds={setSelectedContactIds}
-          onClose={() => setShowDeleteAlert(false)}
+          onClose={() => setIsDeleteAlertOpen(false)}
         />
       </Container>
     </>

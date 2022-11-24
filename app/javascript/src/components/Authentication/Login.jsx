@@ -20,7 +20,7 @@ import {
 } from "./constants";
 
 const Login = ({ history }) => {
-  const [submitted, setSubmitted] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const authDispatch = useAuthDispatch();
   const userDispatch = useUserDispatch();
 
@@ -45,8 +45,8 @@ const Login = ({ history }) => {
         </h2>
         <Formik
           initialValues={LOGIN_FORM_INITIAL_VALUES}
-          validateOnBlur={submitted}
-          validateOnChange={submitted}
+          validateOnBlur={isSubmitted}
+          validateOnChange={isSubmitted}
           validationSchema={LOGIN_FORM_VALIDATION_SCHEMA}
           onSubmit={handleSubmit}
         >
@@ -77,7 +77,7 @@ const Login = ({ history }) => {
                 loading={isSubmitting}
                 size="small"
                 type="submit"
-                onClick={() => setSubmitted(true)}
+                onClick={() => setIsSubmitted(true)}
               />
             </Form>
           )}

@@ -13,7 +13,7 @@ import {
 } from "../constants";
 
 const Form = ({ onClose, refetch, note }) => {
-  const [submitted, setSubmitted] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = async values => {
     try {
@@ -28,8 +28,8 @@ const Form = ({ onClose, refetch, note }) => {
   return (
     <Formik
       initialValues={note}
-      validateOnBlur={submitted}
-      validateOnChange={submitted}
+      validateOnBlur={isSubmitted}
+      validateOnChange={isSubmitted}
       validationSchema={NOTES_FORM_VALIDATION_SCHEMA}
       onSubmit={handleSubmit}
     >
@@ -85,7 +85,7 @@ const Form = ({ onClose, refetch, note }) => {
               loading={isSubmitting}
               style="primary"
               type="submit"
-              onClick={() => setSubmitted(true)}
+              onClick={() => setIsSubmitted(true)}
             />
             <Button
               label="Cancel"

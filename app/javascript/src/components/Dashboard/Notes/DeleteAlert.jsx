@@ -11,10 +11,10 @@ const DeleteAlert = ({
   selectedNote,
   setSelectedNote,
 }) => {
-  const [deleting, setDeleting] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const handleDelete = async () => {
-    setDeleting(true);
+    setIsDeleting(true);
     try {
       await notesApi.destroy({ ids: [selectedNote.id] });
       onClose();
@@ -23,14 +23,14 @@ const DeleteAlert = ({
     } catch (error) {
       logger.error(error);
     } finally {
-      setDeleting(false);
+      setIsDeleting(false);
     }
   };
 
   return (
     <Alert
       isOpen={isOpen}
-      isSubmitting={deleting}
+      isSubmitting={isDeleting}
       title="Delete Note"
       message={
         <>

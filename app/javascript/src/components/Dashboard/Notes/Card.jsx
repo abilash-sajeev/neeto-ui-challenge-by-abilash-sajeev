@@ -8,14 +8,16 @@ import {
   formatDateRelativeToNow,
 } from "components/Dashboard/utils";
 
-import { USER_NAME, USER_AVATAR_URL } from "./constants";
+import { USER_NAME, USER_AVATAR_URL } from "../constants";
 
 const { Menu, MenuItem } = Dropdown;
 
-const Card = ({ note, setSelectedNote, setShowDeleteAlert }) => {
+const Card = ({ note, setSelectedNote, setIsDeleteAlertOpen }) => {
+  const { created_at: noteCreationTimestamp } = note;
+
   const handleDeleteNote = () => {
     setSelectedNote(note);
-    setShowDeleteAlert(true);
+    setIsDeleteAlertOpen(true);
   };
 
   return (
@@ -42,14 +44,14 @@ const Card = ({ note, setSelectedNote, setShowDeleteAlert }) => {
         <div className="flex items-center space-x-2">
           <Clock size={12} />
           <Tooltip
-            content={calculateCreatedAgo(note.created_at)}
+            content={calculateCreatedAgo(noteCreationTimestamp)}
             position="bottom-end"
           >
             <Typography
               className="neeto-ui-text-gray-600"
               style="body3"
             >{`Created ${formatDateRelativeToNow(
-              note.created_at
+              noteCreationTimestamp
             )}`}</Typography>
           </Tooltip>
           <Avatar

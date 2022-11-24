@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { Alert, Toastr } from "neetoui";
 
-import { customizeValuesByDeletionType } from "./utils";
+import { customizeValuesByDeletionType, destroyContacts } from "./utils";
 
 const DeleteAlert = ({
   setContacts,
@@ -14,7 +14,7 @@ const DeleteAlert = ({
   setSelectedContactIds,
   deletionType,
 }) => {
-  const [deleting, setDeleting] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const [ids, title, message] = customizeValuesByDeletionType(
     deletionType,
@@ -22,29 +22,22 @@ const DeleteAlert = ({
     selectedContactIds
   );
 
-  const destroyContacts = ({ ids }) => {
-    setContacts(contacts =>
-      contacts.filter(contact => !ids.includes(contact.id))
-    );
-
+  const handleDelete = () => {
+    setIsDeleting(true);
+    destroyContacts({ ids, setContacts });
     Toastr.success(
       `${ids.length > 1 ? "Contacts" : "Contact"} deleted successfully`
     );
-  };
-
-  const handleDelete = () => {
-    setDeleting(true);
-    destroyContacts({ ids });
     onClose();
     setSelectedContact({});
     setSelectedContactIds([]);
-    setDeleting(false);
+    setIsDeleting(false);
   };
 
   return (
     <Alert
       isOpen={isOpen}
-      isSubmitting={deleting}
+      isSubmitting={isDeleting}
       message={message}
       title={title}
       onClose={onClose}

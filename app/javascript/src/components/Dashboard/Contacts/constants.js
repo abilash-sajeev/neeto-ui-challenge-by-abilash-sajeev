@@ -79,5 +79,3 @@ export const CONTACTS_FORM_VALIDATION_SCHEMA = yup.object().shape({
     })
     .required("Role is required"),
 });
-
-export const USER_AVATAR_URL = "https://i.pravatar.cc/300";

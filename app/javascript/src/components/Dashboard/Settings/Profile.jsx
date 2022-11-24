@@ -34,7 +34,7 @@ const Profile = () => {
       userDispatch({ type: "SET_USER", payload: { user } });
     } catch (err) {
       resetForm();
-      formikPasswordContext.setShowPasswordModal(false);
+      formikPasswordContext.setIsPasswordModalOpen(false);
       logger.error(err);
     }
   };
@@ -43,7 +43,7 @@ const Profile = () => {
     e.preventDefault();
     const { firstName, lastName } = await validateForm();
     if (!firstName && !lastName) {
-      formikPasswordContext.setShowPasswordModal(true);
+      formikPasswordContext.setIsPasswordModalOpen(true);
     }
   };
 

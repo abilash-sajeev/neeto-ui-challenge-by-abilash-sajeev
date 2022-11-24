@@ -9,14 +9,14 @@ const Table = ({
   selectedContactIds,
   setSelectedContactIds,
   setSelectedContact,
-  setShowDeleteAlert,
+  setIsDeleteAlertOpen,
   setDeletionType,
 }) => {
   const [pageNumber, setPageNumber] = useState(1);
 
   const handleDeleteContact = () => {
     setDeletionType("single");
-    setShowDeleteAlert(true);
+    setIsDeleteAlertOpen(true);
   };
 
   return (
