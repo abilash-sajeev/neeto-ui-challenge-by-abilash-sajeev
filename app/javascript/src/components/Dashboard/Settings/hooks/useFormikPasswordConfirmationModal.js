@@ -3,25 +3,25 @@ import { useState, useRef } from "react";
 import { PASSWORD_CONFIRMATION_FORM_INITIAL_VALUES } from "../constants";
 
 export const useFormikPasswordConfirmationModal = () => {
-  const [showPasswordModal, setShowPasswordModal] = useState(false);
+  const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
   const [password, setPassword] = useState(
     PASSWORD_CONFIRMATION_FORM_INITIAL_VALUES["password"]
   );
   const formRef = useRef();
 
   const closeModal = () => {
-    setShowPasswordModal(false);
+    setIsPasswordModalOpen(false);
   };
 
   const handlePasswordConfirmation = passwordFormValues => {
     setPassword(passwordFormValues["password"]);
-    setShowPasswordModal(false);
+    setIsPasswordModalOpen(false);
     formRef.current?.submitForm();
   };
 
   return {
-    showPasswordModal,
-    setShowPasswordModal,
+    isPasswordModalOpen,
+    setIsPasswordModalOpen,
     password,
     formRef,
     closeModal,

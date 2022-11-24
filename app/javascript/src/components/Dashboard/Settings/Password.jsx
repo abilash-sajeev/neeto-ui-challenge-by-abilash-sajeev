@@ -14,7 +14,7 @@ import {
 } from "./constants";
 
 const Password = () => {
-  const [submitted, setSubmitted] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = async (data, { resetForm }) => {
     try {
@@ -34,8 +34,8 @@ const Password = () => {
       <div className="mx-auto flex h-full w-full flex-col items-center justify-center sm:max-w-md">
         <Formik
           initialValues={CHANGE_PASSWORD_FORM_INITIAL_VALUES}
-          validateOnBlur={submitted}
-          validateOnChange={submitted}
+          validateOnBlur={isSubmitted}
+          validateOnChange={isSubmitted}
           validationSchema={CHANGE_PASSWORD_FORM_VALIDATION_SCHEMA}
           onSubmit={handleSubmit}
         >
@@ -65,7 +65,7 @@ const Password = () => {
                 name="submit"
                 size="small"
                 type="submit"
-                onClick={() => setSubmitted(true)}
+                onClick={() => setIsSubmitted(true)}
               />
             </Form>
           )}

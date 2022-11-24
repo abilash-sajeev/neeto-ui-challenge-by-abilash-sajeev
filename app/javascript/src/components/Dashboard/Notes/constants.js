@@ -45,7 +45,3 @@ export const NOTES_FORM_VALIDATION_SCHEMA = yup.object().shape({
     .min(1, "Atleast one tag is required")
     .required("Tag is required"),
 });
-
-export const USER_NAME = "Oliver Smith";
-
-export const USER_AVATAR_URL = "https://i.pravatar.cc/300";

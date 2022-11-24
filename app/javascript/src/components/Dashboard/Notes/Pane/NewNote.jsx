@@ -6,11 +6,11 @@ import Form from "./Form";
 
 import { NOTES_FORM_INITIAL_FORM_VALUES } from "../constants";
 
-const NewNotePane = ({ fetchNotes, showPane, setShowPane }) => {
-  const onClose = () => setShowPane(false);
+const NewNote = ({ fetchNotes, isNewNotePaneOpen, setIsNewNotePaneOpen }) => {
+  const onClose = () => setIsNewNotePaneOpen(false);
 
   return (
-    <Pane isOpen={showPane} onClose={onClose}>
+    <Pane isOpen={isNewNotePaneOpen} onClose={onClose}>
       <Pane.Header>
         <Typography style="h2" weight="semibold">
           Add New Note
@@ -25,4 +25,4 @@ const NewNotePane = ({ fetchNotes, showPane, setShowPane }) => {
   );
 };
 
-export default NewNotePane;
+export default NewNote;

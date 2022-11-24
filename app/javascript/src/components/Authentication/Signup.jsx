@@ -14,7 +14,7 @@ import {
 } from "./constants";
 
 const Signup = ({ history }) => {
-  const [submitted, setSubmitted] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = async formData => {
     try {
@@ -33,8 +33,8 @@ const Signup = ({ history }) => {
         </h2>
         <Formik
           initialValues={SIGNUP_FORM_INITIAL_VALUES}
-          validateOnBlur={submitted}
-          validateOnChange={submitted}
+          validateOnBlur={isSubmitted}
+          validateOnChange={isSubmitted}
           validationSchema={SIGNUP_FORM_VALIDATION_SCHEMA}
           onSubmit={handleSubmit}
         >
@@ -83,7 +83,7 @@ const Signup = ({ history }) => {
                 loading={isSubmitting}
                 size="small"
                 type="submit"
-                onClick={() => setSubmitted(true)}
+                onClick={() => setIsSubmitted(true)}
               />
             </Form>
           )}

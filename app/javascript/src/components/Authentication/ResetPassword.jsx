@@ -12,7 +12,7 @@ import {
 } from "./constants";
 
 const ResetPassword = () => {
-  const [submitted, setSubmitted] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   return (
     <div className="neeto-ui-bg-gray-100 flex h-screen w-screen flex-row items-center justify-center overflow-y-auto overflow-x-hidden p-6">
@@ -26,8 +26,8 @@ const ResetPassword = () => {
         </div>
         <Formik
           initialValues={RESET_PASSWORD_FORM_INITIAL_VALUES}
-          validateOnBlur={submitted}
-          validateOnChange={submitted}
+          validateOnBlur={isSubmitted}
+          validateOnChange={isSubmitted}
           validationSchema={RESET_PASSWORD_FORM_VALIDATION_SCHEMA}
           onSubmit={() => null}
         >
@@ -47,7 +47,7 @@ const ResetPassword = () => {
                   loading={isSubmitting}
                   size="small"
                   type="submit"
-                  onClick={() => setSubmitted(true)}
+                  onClick={() => setIsSubmitted(true)}
                 />
                 <Button
                   label="Back"

@@ -1,8 +1,10 @@
 import React from "react";
 
+import dayjs from "dayjs";
 import { MenuHorizontal } from "neetoicons";
 import { Avatar, Dropdown, Typography } from "neetoui";
 
+import { USER_AVATAR_URL } from "../constants";
 import { formatDate } from "../utils";
 
 const { Menu, MenuItem } = Dropdown;
@@ -98,4 +100,24 @@ export const customizeValuesByDeletionType = (
       selectedContactIds.length > 1 ? "these contacts" : "this contact"
     }? This action cannot be undone.`,
   ];
+};
+
+export const destroyContacts = ({ ids, setContacts }) => {
+  setContacts(contacts =>
+    contacts.filter(contact => !ids.includes(contact.id))
+  );
+};
+
+export const createContact = ({ contact, setContacts }) => {
+  setContacts(contacts =>
+    contacts.concat([
+      {
+        ...contact,
+        id: generateUUID(),
+        role: contact.role.label,
+        userAvatarUrl: USER_AVATAR_URL,
+        createdAt: dayjs(),
+      },
+    ])
+  );
 };

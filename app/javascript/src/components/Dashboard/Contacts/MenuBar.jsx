@@ -4,8 +4,8 @@ import { Search, Plus, Settings } from "neetoicons";
 import { Typography } from "neetoui";
 import { MenuBar as NeetoUIMenuBar } from "neetoui/layouts";
 
-const MenuBar = ({ showMenuBar }) => (
-  <NeetoUIMenuBar showMenu={showMenuBar} title="Contacts">
+const MenuBar = ({ isMenuBarOpen }) => (
+  <NeetoUIMenuBar showMenu={isMenuBarOpen} title="Contacts">
     <NeetoUIMenuBar.Block active count={0} label="All" />
     <NeetoUIMenuBar.Block count={0} label="Archived" />
     <NeetoUIMenuBar.Block count={0} label="Completed" />

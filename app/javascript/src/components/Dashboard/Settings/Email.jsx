@@ -35,7 +35,7 @@ const Email = () => {
       window.location.href = LOGIN_PATH;
     } catch (err) {
       resetForm();
-      formikPasswordContext.setShowPasswordModal(false);
+      formikPasswordContext.setIsPasswordModalOpen(false);
       logger.error(err);
     }
   };
@@ -43,7 +43,7 @@ const Email = () => {
   const promptPassword = async (e, validateForm) => {
     e.preventDefault();
     const { email } = await validateForm();
-    if (!email) formikPasswordContext.setShowPasswordModal(true);
+    if (!email) formikPasswordContext.setIsPasswordModalOpen(true);
   };
 
   return (
@@ -78,7 +78,7 @@ const Email = () => {
         <ConfirmPasswordFormModal
           alertMessage="You will be logged out upon updating your email! Please enter your password to continue."
           header="Are you sure you want to update your email?"
-          isOpen={formikPasswordContext.showPasswordModal}
+          isOpen={formikPasswordContext.isPasswordModalOpen}
           onClose={formikPasswordContext.closeModal}
           onSubmit={formikPasswordContext.handlePasswordConfirmation}
         />

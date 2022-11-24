@@ -6,11 +6,15 @@ import Form from "./Form";
 
 import { CONTACTS_FORM_INITIAL_FORM_VALUES } from "../constants";
 
-const NewContactPane = ({ setContacts, showPane, setShowPane }) => {
-  const onClose = () => setShowPane(false);
+const NewContact = ({
+  setContacts,
+  isNewContactPaneOpen,
+  setIsNewContactPaneOpen,
+}) => {
+  const onClose = () => setIsNewContactPaneOpen(false);
 
   return (
-    <Pane isOpen={showPane} onClose={onClose}>
+    <Pane isOpen={isNewContactPaneOpen} onClose={onClose}>
       <Pane.Header>
         <Typography style="h2" weight="semibold">
           Add New Contact
@@ -25,4 +29,4 @@ const NewContactPane = ({ setContacts, showPane, setShowPane }) => {
   );
 };
 
-export default NewContactPane;
+export default NewContact;
